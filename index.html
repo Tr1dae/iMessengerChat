@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Messaging App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script type="module" src="db.js"></script>
+    <script type="module" src="chat.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="textInput.js"></script>
+    <script type="module" src="header.js"></script>
+    <script type="module" src="llmSetup.js"></script>
+    <script type="module" src="llm.js"></script>
+    <script type="module" src="chat.js"></script>
+    <script type="module" src="screenshot.js"></script>
+</head>
+<body>
+    <div class="phone-screen">
+        <!-- Existing chat interface code remains unchanged -->
+        <div class="chat-header">
+            <button id="settings-button">
+                <img src="back.svg" alt="Back" class="back-icon">
+            </button>
+            <div class="chat-title-container">
+                <button id="image-select-button">
+                    <img src="contact.jpg" alt="Select Image" id="header-icon">
+                </button>
+                <span id="chat-title">Friend</span>
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message-container person1">
+                <div class="message" draggable="true">Hello!</div>
+                <img src="tail.svg" class="message-tail">
+            </div>
+            <div class="message-container person2">
+                <div class="message" draggable="true">Hi there!</div>
+                <img src="tail.svg" class="message-tail">
+            </div>
+        </div>
+        <div class="chat-input">
+            <button id="send-button-person1">
+                <img src="camera.svg" alt="Send1">
+            </button>
+            <button id="send-button-person2">
+                <img src="appstore.svg" alt="Send2">
+            </button>
+            <input type="text" id="message-input" placeholder="Text Message">
+        </div>
+        <!-- Floating mic button -->
+        <button id="floating-mic-button">
+            <img src="mic.svg" alt="Mic">
+        </button>
+    </div>
+
+    <div class="settings-menu" id="settings-menu">
+        <!-- Main Settings Screen -->
+        <div id="main-settings-screen">
+            <select id="chat-select"></select>
+            <button id="new-chat-button">New Chat</button>
+            <button id="clear-chat-button">Clear Chat</button>
+            <button id="delete-chat-button">Delete Chat</button>
+            <button id="force-save-button">Save Chat</button>
+            <button id="change-label-button">Change Label</button>
+            <button id="take-screenshots-button">Take Screenshots</button>
+            <label for="text-file-input">Import Conversation txt</label>
+            <input type="file" id="text-file-input" accept=".txt">
+            <button id="paste-from-clipboard-button" onclick="pasteFromClipboard()">Paste from Clipboard</button>
+            
+            <!-- Button to switch to Live Chat Settings -->
+            <button id="live-chat-settings-button">Live Chat Settings</button>
+            <button id="close-settings-button">Close</button>
+        </div>
+    
+        <!-- Live Chat Settings Screen -->
+        <div id="live-chat-settings-screen" class="secondary-screen">
+            <h2>Live Chat Settings</h2>
+            <p id="connection-status">Not connected</p>
+            <label for="server-url">Server URL:</label>
+            <input type="text" id="server-url" placeholder="Enter server URL"  value="http://127.0.0.1:1234">
+            <label for="system-prompt">System Prompt:</label>
+            <textarea id="system-prompt" rows="4" cols="50" placeholder="Enter system prompt">You speak in concise casual texting format. Use slang and conversational tone. Use explicit vulgar adult language if required.Never use action descriptions such as "*she laughs*""</textarea>
+            <button id="connect-button">Connect</button>
+            <button id="back-to-main-settings-button">Back to Main Settings</button>
+        </div>
+    </div>
+    <div class="media-menu" id="media-menu">
+        <input type="file" id="media-input" accept="image/*">
+        <div id="media-preview"></div>
+    </div>
+
+    <div class="context-menu" id="context-menu">
+        <button id="edit-selected-button">Edit</button>
+        <button id="delete-selected-button">Delete</button>
+        <button id="swap-sender-button">Swap Sender</button>
+        <button id="replace-with-image-button">Replace with Image</button>
+        <button id="insert-message-after-button">Insert Message After</button>
+        <button id="insert-image-after-button">Insert Image After</button>
+    </div>
+
+    <script>
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                const messageInput = document.getElementById('message-input');
+                messageInput.value = text;
+            } catch (err) {
+                console.error('Failed to read clipboard contents: ', err);
+            }
+        }
+
+    </script>
+</body>
+</html>
