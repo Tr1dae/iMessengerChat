@@ -7,7 +7,7 @@ import {
     setupConnectionButton,
     currentModel, 
     isConnected // Import isConnected from llmSetup.js
-} from 'llmSetup.js';
+} from './llmsetup.js';
 
 import { sendMessage as sendChatMessage, sendBotMessage } from './chat.js';
 
