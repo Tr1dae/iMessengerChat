@@ -68,8 +68,8 @@ body {
     top: 0;
     left: 0;
     width: 95%;
-    backdrop-filter: blur(20px); /* Increased blur for transparency */
-    -webkit-backdrop-filter: blur(20px); /* Safari support */
+    backdrop-filter: blur(50px); /* Increased blur for transparency */
+    -webkit-backdrop-filter: blur(50px); /* Safari support */
     background-color: rgba(54, 65, 70, 0.3); /* More transparent background */
 }
 
@@ -118,9 +118,15 @@ body {
 }
 
 .back-icon {
-    width: 24px;
+    width: 14px;
     height: 24px;
     fill: #0a84ff!important;
+}
+.nothing-icon {
+    width: 46px;
+    height: 34px;
+    right: 0;
+    /* fill: #0a84ff!important; */
 }
 
 .chat-messages {
@@ -162,7 +168,7 @@ body {
     margin: 0 auto; /* Center the image horizontally */
     -webkit-user-drag: none; /* Standard syntax */
     pointer-events: none; /* Optional: Prevents the image from being interactive */
-    scale: 110% ;
+    scale: 115% ;
 }
 
 
